@@ -32,10 +32,12 @@ Vagrant.configure("2") do |config|
     apt-get install default-jdk ant -y
     cd batfish/
     sudo tools/install_z3_rhel_x86_64.sh /usr
-    echo "source tools/batfish_functions.sh" >> .bashrc
+    echo "source tools/batfish_functions.sh" >> ~/.bashrc
     source tools/batfish_functions.sh
+    export ANT_OPTS=-Xmx1g
     batfish_build_all
-    allinone -cmdfile tests/basic/commands
-    allinone -runclient false
+    chown -R ubuntu:ubuntu /home/ubuntu/batfish/
+    #allinone -cmdfile tests/basic/commands
+    #allinone -runclient false
   SHELL
 end
